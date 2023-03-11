@@ -16,9 +16,9 @@ class FL_Shipping_Manager extends Module {
         $this->description = $this->l('Nentegrasyon, Türk pazaryerleri Trendyol, Hepsiburada, N11 ve Çiçek Sepetindeki ürünleri ve siparişleri tek bir yerden yönetmenizi sağlar. Bu modül, stok, fiyat ve sipariş senkronizasyonu gibi temel özellikleri sunarak, mağazanızın performansını arttırırken müşteri memnuniyetini de sağlar');
         
         $this->confirmUninstall = $this->l('Sonsuza kadar hatırlanacak bir uygulama olmayacak olsam da,
-         seninle geçirdiğimiz zamanı asla unutmayacağım. Seni seviyorum ve sana başarılar dilerim...');
-        
-         public function install()
+         seninle geçirdiğimiz zamanı asla unutmayacağım. Seni seviyorum ve sana başarılar dilerim...');   
+    }
+    public function install()
          {
              $sql = array();
             
@@ -29,6 +29,8 @@ class FL_Shipping_Manager extends Module {
                 PRIMARY KEY (id_config)
             ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
             $sql[] = 'INSERT INTO ' . _DB_PREFIX_ . 'nen_config (name, value) VALUES ("trendyol_api_key", "")';
+            $sql[] = 'INSERT INTO' . _DB_PREFIX_ . 'nen_config (name, value) VALUES ("trendyol_secret_key", "")';
+            $sql[] = 'INSERT INTO' . _DB_PREFIX_ . 'nen_config (name, value) VALUES ("trendyol_merchant_id", "")';
              $sql[] = 'CREATE TABLE IF NOT EXISTS ' . _DB_PREFIX_ . 'nen_trendyol_products (
                  id_trendyol_product INT UNSIGNED NOT NULL AUTO_INCREMENT,
                  trendyol_id VARCHAR(50) NOT NULL,
@@ -46,8 +48,6 @@ class FL_Shipping_Manager extends Module {
          
              return true;
          }
-         
-    }
     
     public function uninstall()
     {
